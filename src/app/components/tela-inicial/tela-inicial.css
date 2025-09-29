@@ -1,0 +1,49 @@
+.menu-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.infos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #cccccc;
+  width: 20rem;
+  border-radius: 5px;
+}
+
+.menu-info div p {
+  font-size: 25px;
+}
+
+.area-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.area-img img {
+  width: 2rem;
+}
+
+.parte-jogo{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.botao-click{
+  background-color: #ffffff;
+  border: none;
+  
+}
+
+.botao-click img {
+  width: 20rem;
+}
