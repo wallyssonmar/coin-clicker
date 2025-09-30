@@ -34,16 +34,33 @@
 .parte-jogo{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
+  margin: 5rem 2rem 2rem 2rem;
 }
 
 .botao-click{
   background-color: #ffffff;
   border: none;
-  
+  margin-left: 20rem;
 }
 
 .botao-click img {
   width: 20rem;
+}
+
+.upgrades{
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.upgrade-click{
+  background-color: #cccccc;
+  width: 20rem;
+  max-height: 35rem;
+  overflow-y: auto;
+  border: #9c9c9c solid 1px;
+  border-radius: 5px;
+  padding: 0 2rem 2rem 2rem;
 }

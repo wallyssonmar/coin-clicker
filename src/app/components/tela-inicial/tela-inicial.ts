@@ -12,11 +12,10 @@ export class TelaInicial {
  constructor(private cdr: ChangeDetectorRef) {}
   
   moedasAtual: number = 0;
-  moedasPorSegundo: number = 3;
+  moedasPorSegundo: number = 0;
   totalCliques: number = 0;
   moedasPorClique: number = 1;
   moedas:number = 0;
-
   moedasMenorAprendiz:number = 0;
 
   
@@ -32,6 +31,10 @@ export class TelaInicial {
     this.totalCliques += 1;
   }
 
+  somarMoedasPorSegundo(){
+    this.moedasPorSegundo = this.moedasMenorAprendiz;
+  }
+
   primeiroUpgrade() {
     return (this.moedasPorClique += 1);
   }
@@ -42,6 +45,7 @@ export class TelaInicial {
 
   menorAprendiz() {
     this.moedasMenorAprendiz += 0.5;
+    this.somarMoedasPorSegundo();
     setInterval(() =>{
       this.moedasAtual += this.moedasMenorAprendiz;
       this.cdr.detectChanges();
