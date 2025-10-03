@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { promises } from 'node:dns';
+import { CoinPorSegundo } from '../../service/coin-por-segundo';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -8,30 +9,29 @@ import { promises } from 'node:dns';
   styleUrl: './tela-inicial.css',
 })
 export class TelaInicial {
+  constructor(private cdr: ChangeDetectorRef, private coinPorSegundo: CoinPorSegundo) {}
 
- constructor(private cdr: ChangeDetectorRef) {}
-  
   moedasAtual: number = 0;
   moedasPorSegundo: number = 0;
   totalCliques: number = 0;
   moedasPorClique: number = 1;
-  moedas:number = 0;
-  moedasMenorAprendiz:number = 0;
+  moedas: number = 0;
+  moedasMenorAprendiz: number = 0;
+  moedasEstagiario: number = 0;
 
-  
-
- 
-
-  sleep(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  ngOnInit() {
+    setInterval(() => {
+      this.moedasAtual += this.moedasPorSegundo;
+      console.log(this.moedasAtual);
+      this.cdr.detectChanges();
+    }, 1000);
   }
-
   clicouBtn() {
     this.moedasAtual += this.moedasPorClique;
-    this.totalCliques += 1;
+    this.totalCliques++;
   }
 
-  somarMoedasPorSegundo(){
+  somarMoedasPorSegundo() {
     this.moedasPorSegundo = this.moedasMenorAprendiz;
   }
 
@@ -43,13 +43,7 @@ export class TelaInicial {
     return (this.moedasPorClique += 2);
   }
 
-  menorAprendiz() {
-    this.moedasMenorAprendiz += 0.5;
-    this.somarMoedasPorSegundo();
-    setInterval(() =>{
-      this.moedasAtual += this.moedasMenorAprendiz;
-      this.cdr.detectChanges();
-    }, 1000);
-    
+  coinPsegundo(cargo: string) {
+    return (this.moedasPorSegundo = this.coinPorSegundo.coinPorSegundoService(cargo));
   }
 }
