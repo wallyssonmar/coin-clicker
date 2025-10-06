@@ -34,7 +34,7 @@ export class CoinPorSegundo {
         this.coinPorSegundo += 1000;
         break;
     }
-    console.log(this.coinPorSegundo);
+    
     return this.coinPorSegundo;
     
   }

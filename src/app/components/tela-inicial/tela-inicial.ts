@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { promises } from 'node:dns';
 import { CoinPorSegundo } from '../../service/coin-por-segundo';
+import { CoinPorClick } from '../../service/coin-por-click';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -9,7 +10,11 @@ import { CoinPorSegundo } from '../../service/coin-por-segundo';
   styleUrl: './tela-inicial.css',
 })
 export class TelaInicial {
-  constructor(private cdr: ChangeDetectorRef, private coinPorSegundo: CoinPorSegundo) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private coinPorSegundo: CoinPorSegundo,
+    private coinPorClick: CoinPorClick
+  ) {}
 
   moedasAtual: number = 0;
   moedasPorSegundo: number = 0;
@@ -18,14 +23,10 @@ export class TelaInicial {
   moedas: number = 0;
   moedasMenorAprendiz: number = 0;
   moedasEstagiario: number = 0;
+  moedasPorSegundoAtivado: boolean = false;
 
-  ngOnInit() {
-    setInterval(() => {
-      this.moedasAtual += this.moedasPorSegundo;
-      console.log(this.moedasAtual);
-      this.cdr.detectChanges();
-    }, 1000);
-  }
+  ngOnInit() {}
+
   clicouBtn() {
     this.moedasAtual += this.moedasPorClique;
     this.totalCliques++;
@@ -42,8 +43,20 @@ export class TelaInicial {
   segundoUpgrade() {
     return (this.moedasPorClique += 2);
   }
+  coinPclick(cargo: string) {
+    return (this.moedasPorClique = this.coinPorClick.coinPorClickService(cargo));
+  }
 
   coinPsegundo(cargo: string) {
     return (this.moedasPorSegundo = this.coinPorSegundo.coinPorSegundoService(cargo));
+  }
+  ativouMoedasPorSegundo(verify: boolean) {
+    this.moedasPorSegundoAtivado = verify;
+    if (this.moedasPorSegundoAtivado) {
+      setInterval(() => {
+        this.moedasAtual += this.moedasPorSegundo;
+        this.cdr.detectChanges();
+      }, 1000);
+    }
   }
 }
