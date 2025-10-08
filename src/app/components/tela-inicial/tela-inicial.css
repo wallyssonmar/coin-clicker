@@ -103,6 +103,10 @@
   padding: 0 2rem 2rem 2rem;
 }
 
+.upgrade-click p {
+  margin: 0.25rem 0;
+}
+
 .upgrade-click h3{
   margin-bottom: 0;
 }

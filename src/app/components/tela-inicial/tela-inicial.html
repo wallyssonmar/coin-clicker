@@ -35,129 +35,18 @@
     <section class="upgrades">
       <div class="upgrade-click">
         <h2>Coin por click</h2>
-        <div>
-          <h3>Chave de fenda</h3>
-          <div class="btn-comprar">
-            <p>+0,5 Coin/Click</p>
-            <button (click)="coinPclick('menorAprendiz')">Comprar</button>
-          </div>
-        </div>
-
-        <div>
-          <h3>Alicate universal</h3>
-          <div class="btn-comprar">
-            <p>+1 Coin/Click</p>
-            <button (click)="coinPclick('estagiario')">Comprar</button>
-          </div>
-        </div>
-
-        <div>
-          <h3>Martelo</h3>
-          <div class="btn-comprar">
-            <p>+5 Coin/Click</p>
-            <button (click)="coinPclick('auxiliar')">Comprar</button>
-          </div>
-        </div>
-
-        <div>
-          <h3>Serrote</h3>
-          <div class="btn-comprar">
-            <p>+10 Coin/Click</p>
-            <button (click)="coinPclick('tecnico')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Lanterna de mão</h3>
-          <div class="btn-comprar">
-            <p>+25 Coin/Click</p>
-            <button (click)="coinPclick('analista')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Jogo de chaves Allen</h3>
-          <div class="btn-comprar">
-            <p>+100 Coin/Click</p>
-            <button (click)="coinPclick('gerente')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Parafusadeira elétrica</h3>
-          <div class="btn-comprar">
-            <p>+500 Coin/Click</p>
-            <button (click)="coinPclick('diretor')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Kit profissional de ferramentas</h3>
-          <div class="btn-comprar">
-            <p>+1000 Coin/Click</p>
-            <button (click)="coinPclick('ceo')">Comprar</button>
-          </div>
-        </div>
       </div>
       <div class="upgrade-click">
         <h2>Coin por segundo</h2>
 
-        <div>
-          <h3>Menor aprendiz</h3>
+        <div *ngFor="let item of coinPorSegundo.upgrades | keyvalue : noSort">
+          <h3>{{ item.value.nome }}</h3>
+          <p>Preço: {{ item.value.custo }} coins</p>
           <div class="btn-comprar">
-            <p>+0,5 Coin/Seg</p>
-            <button (click)="ativouMoedasPorSegundo(true); coinPsegundo('menorAprendiz')">
+            <p>+ {{ item.value.ganho }}coin/seg</p>
+            <button (click)="ativouMoedasPorSegundo(true);coinPsegundo(item.key)" [disabled]="moedasAtual < item.value.custo">
               Comprar
             </button>
-          </div>
-        </div>
-
-        <div>
-          <h3>Estagiário</h3>
-          <div class="btn-comprar">
-            <p>+1 Coin/Seg</p>
-            <button (click)="coinPsegundo('estagiario')">Comprar</button>
-          </div>
-        </div>
-
-        <div>
-          <h3>Auxiliar</h3>
-          <div class="btn-comprar">
-            <p>+5 Coin/Seg</p>
-            <button (click)="coinPsegundo('auxiliar')">Comprar</button>
-          </div>
-        </div>
-
-        <div>
-          <h3>Técnico</h3>
-          <div class="btn-comprar">
-            <p>+10 Coin/Seg</p>
-            <button (click)="coinPsegundo('tecnico')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Analista</h3>
-          <div class="btn-comprar">
-            <p>+25 Coin/Seg</p>
-            <button (click)="coinPsegundo('analista')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Gerente</h3>
-
-          <div class="btn-comprar">
-            <p>+100 Coin/Seg</p>
-            <button (click)="coinPsegundo('gerente')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>Diretor</h3>
-          <div class="btn-comprar">
-            <p>+500 Coin/Seg</p>
-            <button (click)="coinPsegundo('diretor')">Comprar</button>
-          </div>
-        </div>
-        <div>
-          <h3>CEO</h3>
-          <div class="btn-comprar">
-            <p>+1000 Coin/Seg</p>
-            <button (click)="coinPsegundo('ceo')">Comprar</button>
           </div>
         </div>
       </div>

@@ -5,6 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class CoinPorClick {
   coinPorClick: number = 0;
+  
+
+
+
   coinPorClickService(cargo: string) {
     switch (cargo) {
       case 'menorAprendiz':
