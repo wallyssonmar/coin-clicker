@@ -27,7 +27,7 @@ export class CoinPorSegundo {
     return this.coinPorSegundo;
   }
 
-  subtrairMoedasAtual(cargo: string, moedasAtual: number) {
+  subtrairCoinPorSegundo(cargo: string, moedasAtual: number) {
     const upgrade = this.upgrades[cargo];
     if (moedasAtual >= upgrade.custo) {
       moedasAtual -= upgrade.custo;

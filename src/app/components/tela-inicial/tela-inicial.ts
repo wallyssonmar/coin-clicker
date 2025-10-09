@@ -17,24 +17,12 @@ export class TelaInicial {
     public coinPorClick: CoinPorClick
   ) {}
 
-  moedasAtual: number = 1000;
+  moedasAtual: number = 0;
   moedasPorSegundo: number = 0;
   totalCliques: number = 0;
   moedasPorClique: number = 1;
-  moedas: number = 0;
   moedasPorSegundoAtivado: boolean = false;
   objectKeys = Object.keys;
-
-  //VAR DOS UPGRADES DE CLICK
-  custoChaveDeFenda:number = 10;
-  custoAlicateUniversal:number = 100;
-  custoMartelo:number = 500;
-  custoSerrote:number = 1500;
-  custoLanterna:number = 10000;
-  custoJogoChaveAllen:number = 75000;
-  custoParafusadeira:number = 500000;
-  custoKitProfissional:number = 2000000;
-
 
   ngOnInit() {}
 
@@ -43,35 +31,27 @@ export class TelaInicial {
     this.totalCliques++;
   }
 
-  primeiroUpgrade() {
-    return (this.moedasPorClique += 1);
-  }
-
-  segundoUpgrade() {
-    return (this.moedasPorClique += 2);
-  }
   coinPclick(cargo: string) {
-    return (this.moedasPorClique = this.coinPorClick.coinPorClickService(cargo));
+    this.moedasPorClique = this.coinPorClick.acrescentarCoinPorClick(cargo, this.moedasAtual, this.moedasPorClique);
+    this.moedasAtual = this.coinPorClick.subtrairUpgradeClick(cargo, this.moedasAtual);
   }
-   coinPsegundo(cargo:string){
+  coinPsegundo(cargo: string) {
     this.moedasPorSegundo = this.coinPorSegundo.comprarUpgradePorSegundo(cargo, this.moedasAtual);
-    this.moedasAtual = this.coinPorSegundo.subtrairMoedasAtual(cargo, this.moedasAtual);
-   }
+    this.moedasAtual = this.coinPorSegundo.subtrairCoinPorSegundo(cargo, this.moedasAtual);
+  }
 
-   noSort(){
+  noSort() {
     return 0;
-   }
-  
-  ativouMoedasPorSegundo(verify: boolean) {
-    
+  }
 
+  ativouMoedasPorSegundo(verify: boolean) {
     if (verify != this.moedasPorSegundoAtivado) {
       setInterval(() => {
         console.log(this.moedasAtual);
         this.moedasAtual += this.moedasPorSegundo;
         this.cdr.detectChanges();
       }, 1000);
-      
+
       this.moedasPorSegundoAtivado = verify;
     }
   }

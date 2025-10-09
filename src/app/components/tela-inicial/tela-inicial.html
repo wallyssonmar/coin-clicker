@@ -35,6 +35,16 @@
     <section class="upgrades">
       <div class="upgrade-click">
         <h2>Coin por click</h2>
+        <div *ngFor="let item of coinPorClick.upgrades | keyvalue : noSort">
+          <h3>{{ item.value.nome }}</h3>
+          <p>Preço {{ item.value.custo }}</p>
+          <div class="btn-comprar">
+            <p>+ {{ item.value.ganho }} coin/click</p>
+            <button (click)="coinPclick(item.key)" [disabled]="moedasAtual < item.value.custo">
+              Comprar
+            </button>
+          </div>
+        </div>
       </div>
       <div class="upgrade-click">
         <h2>Coin por segundo</h2>
@@ -44,7 +54,10 @@
           <p>Preço: {{ item.value.custo }} coins</p>
           <div class="btn-comprar">
             <p>+ {{ item.value.ganho }}coin/seg</p>
-            <button (click)="ativouMoedasPorSegundo(true);coinPsegundo(item.key)" [disabled]="moedasAtual < item.value.custo">
+            <button
+              (click)="ativouMoedasPorSegundo(true); coinPsegundo(item.key)"
+              [disabled]="moedasAtual < item.value.custo"
+            >
               Comprar
             </button>
           </div>
