@@ -17,8 +17,8 @@ export class TelaInicial {
     public coinPorClick: CoinPorClick
   ) {}
 
-  moedasAtual: number = 10;
-  moedasPorSegundo: number = 1;
+  moedasAtual: number = 1000;
+  moedasPorSegundo: number = 0;
   totalCliques: number = 0;
   moedasPorClique: number = 1;
   moedas: number = 0;
@@ -35,10 +35,6 @@ export class TelaInicial {
   custoParafusadeira:number = 500000;
   custoKitProfissional:number = 2000000;
 
-  
-  
- 
-  
 
   ngOnInit() {}
 
@@ -58,21 +54,25 @@ export class TelaInicial {
     return (this.moedasPorClique = this.coinPorClick.coinPorClickService(cargo));
   }
    coinPsegundo(cargo:string){
-    this.moedasAtual = this.coinPorSegundo.comprarUpgradePorSegundo(cargo, this.moedasAtual);
+    this.moedasPorSegundo = this.coinPorSegundo.comprarUpgradePorSegundo(cargo, this.moedasAtual);
+    this.moedasAtual = this.coinPorSegundo.subtrairMoedasAtual(cargo, this.moedasAtual);
    }
+
    noSort(){
     return 0;
    }
   
   ativouMoedasPorSegundo(verify: boolean) {
-    this.moedasPorSegundoAtivado = verify;
     
-    if (this.moedasPorSegundoAtivado) {
+
+    if (verify != this.moedasPorSegundoAtivado) {
       setInterval(() => {
         console.log(this.moedasAtual);
         this.moedasAtual += this.moedasPorSegundo;
         this.cdr.detectChanges();
       }, 1000);
+      
+      this.moedasPorSegundoAtivado = verify;
     }
   }
 }
